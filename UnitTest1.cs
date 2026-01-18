@@ -1,15 +1,126 @@
-﻿namespace CSharpSelFramework;
+﻿using System;
+using System.Linq;
+using CSharpSelFramework.Base;
+using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
 
-public class Tests
+namespace AutomationTestingUdemy
 {
-    [SetUp]
-    public void Setup()
+    public class E2ETest : BaseClass
     {
-    }
+        
 
-    [Test]
-    public void Test1()
-    {
-        Assert.Pass();
+        [Test]
+        public void Test1()
+        {
+
+
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+
+            driver.FindElement(By.Id("username")).SendKeys("rahulshettyacademy");
+            driver.FindElement(By.Name("password")).SendKeys("learning");
+
+
+            //Click on one of the radio button
+            IList<IWebElement> radios = driver.FindElements(By.CssSelector("[type='radio']"));
+            foreach (IWebElement radioButton in radios)
+            {
+                if (radioButton.GetAttribute("value").Equals("user"))
+                {
+                    radioButton.Click();
+                }
+            }
+
+            // Handle the popup
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.Id("okayBtn")));
+            driver.FindElement(By.Id("okayBtn")).Click();
+
+
+            // Select the dropdown
+            IWebElement DropDown = driver.FindElement(By.XPath("//select[@class='form-control']"));
+            SelectElement select = new SelectElement(DropDown);
+            select.SelectByValue("consult");
+
+            // Click on teams and condition checkbox
+            driver.FindElement(By.Id("terms")).Click();
+
+            //Click on signin button
+            IWebElement SignInBtn = driver.FindElement(By.Id("signInBtn"));
+            SignInBtn.Click();
+
+            // Verify that the Checkout button is visible
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.PartialLinkText("Checkout")));
+
+
+            // get the list of cards
+            String[] expectedProd = { "iphone X", "Blackberry" };
+
+            // Create a new array for storing the element from cart
+            String[] actualProd = new string[2];
+
+
+            foreach (string item in expectedProd)
+            {
+                // Get the all the list of products
+                IList<IWebElement> products = driver.FindElements(By.TagName("app-card"));
+
+                foreach (IWebElement product in products)
+                {
+                    string title = product
+                        .FindElement(By.CssSelector(".card-title a")).Text;
+
+                    if (title.Equals(item))
+                    {
+                        product
+                            .FindElement(By.CssSelector(".card-footer button"))
+                            .Click();
+                        break;
+                    }
+                }
+            }
+            //Click on checkout button
+            driver.FindElement(By.XPath("//a[contains(normalize-space(), 'Checkout')]")).Click();
+            //TestContext.Progress.WriteLine(ProdTitle.Text);
+
+
+            // Get the all cart items and compare with expected items.
+            IList<IWebElement> checkoutCards = driver.FindElements(By.CssSelector("h4 a"));
+
+            for (int i = 0; i < checkoutCards.Count; i++)
+            {
+                actualProd[i] = checkoutCards[i].Text;
+            }
+            Assert.That(actualProd, Is.EqualTo(expectedProd));
+
+            TestContext.WriteLine("Test is done");
+
+            // Click on Checkout button in cart section
+            driver.FindElement(By.CssSelector(".btn-success")).Click();
+
+            //Enter the contry in textbox
+            driver.FindElement(By.Id("country")).SendKeys("Ind");
+
+            // Wait until options are visible
+            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.LinkText("India")));
+
+            // Click on India option
+            driver.FindElement(By.LinkText("India")).Click();
+
+            // Click on checkbox
+            driver.FindElement(By.CssSelector(".checkbox label")).Click();
+
+            //Click on purchase button
+            driver.FindElement(By.CssSelector("[value='Purchase']")).Click();
+            string SuccessText = driver.FindElement(By.CssSelector(".alert-success")).Text;
+            TestContext.WriteLine(SuccessText);
+
+            StringAssert.Contains("Success! Thank you!", SuccessText);
+
+            driver.Quit();
+
+        }
     }
 }
+
