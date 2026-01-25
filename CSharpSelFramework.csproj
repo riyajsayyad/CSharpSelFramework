@@ -24,11 +24,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Utilities\" />
+    <None Remove="Tests\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Usings.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Utilities\" />
+    <Folder Include="Tests\" />
   </ItemGroup>
 </Project>
