@@ -48,12 +48,13 @@ namespace CSharpSelFramework.Base
                 default:
                     throw new ArgumentException("Browser not supported");
             }
+           
         }
-
-        //[TearDown]
+        [TearDown]
         public void TearDown()
         {
             driver.Quit();
+            TestContext.WriteLine("Succussfully quiitng the browser");
         }
     }
 }
