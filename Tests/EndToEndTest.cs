@@ -117,6 +117,8 @@ namespace AutomationTestingUdemy
 
             StringAssert.Contains("Success! Thank you!", SuccessText);
 
+            TestContext.WriteLine("Succussfully test is runnig");
+
             driver.Quit();
 
         }

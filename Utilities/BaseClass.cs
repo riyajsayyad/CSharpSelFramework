@@ -55,6 +55,10 @@ namespace CSharpSelFramework.Base
         {
             driver.Quit();
             TestContext.WriteLine("Succussfully quiitng the browser");
+<<<<<<< HEAD
+=======
+            TestContext.WriteLine("removed fist and adding sec");
+>>>>>>> 05a04d3 (Testing purpose)
         }
     }
 }
