@@ -8,7 +8,7 @@ using OpenQA.Selenium.Support.UI;
 
 namespace AutomationTestingUdemy
 {
-    public class E2ETest : BaseClass
+    public class EndToEnd : BaseClass
     {
         
 
@@ -16,11 +16,10 @@ namespace AutomationTestingUdemy
         public void Test1()
         {
 
-
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
 
             driver.FindElement(By.Id("username")).SendKeys("rahulshettyacademy");
-            driver.FindElement(By.Name("password")).SendKeys("learning");
+            driver.FindElement(By.Name("password")).SendKeys("Learning@830$3mK2");
 
 
             //Click on one of the radio button
