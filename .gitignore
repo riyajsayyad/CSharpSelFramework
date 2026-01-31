@@ -1,0 +1,11 @@
+# macOS
+.DS_Store
+
+# Visual Studio
+.vs/
+bin/
+obj/
+
+# Rider / cache
+*.user
+*.suo
