@@ -19,8 +19,8 @@ namespace CSharpSelFramework.Base
             //ChromeOptions options = new ChromeOptions();
             //options.AddArgument("--incognito");
 
-            String browser = ConfigurationManager.AppSettings["browser"];
-            InitBrowser("Chrome");
+            string browser = ConfigurationManager.AppSettings["browser"];
+            InitBrowser(browser);
 
             //driver.Navigate().GoToUrl("");
             driver.Manage().Window.Maximize();

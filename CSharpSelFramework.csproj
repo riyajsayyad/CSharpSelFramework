@@ -21,14 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Usings.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <None Remove="Utilities\" />
     <None Remove="Tests\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Usings.cs" Condition=" '$(EnableDefaultCompileItems)' == 'true' " />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Utilities\" />
@@ -36,6 +30,6 @@
   </ItemGroup>
 
   <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
-      <Copy SourceFiles="App.config" DestinationFiles="$(OutDir)\testhost.dll.config"/>
+      <Copy SourceFiles="App.config" DestinationFiles="$(OutDir)\testhost.dll.config" />
   </Target>
 </Project>
