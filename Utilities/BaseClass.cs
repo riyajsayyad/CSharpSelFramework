@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -18,6 +19,7 @@ namespace CSharpSelFramework.Base
             //ChromeOptions options = new ChromeOptions();
             //options.AddArgument("--incognito");
 
+            String browser = ConfigurationManager.AppSettings["browser"];
             InitBrowser("Chrome");
 
             //driver.Navigate().GoToUrl("");
@@ -55,10 +57,7 @@ namespace CSharpSelFramework.Base
         {
             driver.Quit();
             TestContext.WriteLine("Succussfully quiitng the browser");
-<<<<<<< HEAD
-=======
             TestContext.WriteLine("removed fist and adding sec");
->>>>>>> 05a04d3 (Testing purpose)
         }
     }
 }
